@@ -1,22 +1,69 @@
-# pdfFile_sorter
+# PDF Page Count Filter
 
-Program Description
-This program is used to verify the contents of PDF files. If a file does not have the number of pages specified by the user, the program will move that file to a subfolder specified by the user and delete the original version of the file from the main folder.
+## Overview
+This script automates verification of PDF files based on the number of pages.  
+PDF files that **do NOT match** the specified page count are automatically moved to a separate folder.
 
-I wrote the program in Python programming language and used the PyPDF2 library to manipulate PDF files.
+This is useful for:
+- Document validation
+- Batch quality checks
+- Pre-processing documents before further automation or ETL workflows
 
-Instructions
-To run the program, follow these steps:
+## Features
+- Scans all PDF files in a selected directory
+- Checks number of pages using PyPDF2
+- Moves invalid PDFs to another directory
+- Automatically creates destination folder if missing
 
-- When prompted, enter the path to the folder containing the PDF files to be examined.
-- When prompted, enter the path to the folder where you want to store files with the selected number of pages.
-- When prompted, enter the number of pages you want to check for in the files.
-- Run the program.
-After running the program, it will iterate through all the files located in the folder specified by the user and move files that do not have the selected number of pages to the folder specified by the user.
+## Requirements
+- Python 3.x
+- PyPDF2
 
-Note: The program permanently removes the original version of the file from the main folder, so be sure to make a backup of any files you want to test.
+Install dependency:
+```bash
+pip install PyPDF2
+```
 
-Requirements
-The program requires the PyPDF2 library to be installed.
+## How It Works
+1. User provides:
+   - Source folder with PDFs
+   - Destination folder for invalid PDFs
+   - Expected page count
+2. Script iterates through all PDF files
+3. PDFs with a different number of pages are moved
 
-You can install it using the pip install PyPDF2 command -> (win + cmd).
+## Usage
+Run the script:
+```bash
+python pdf_page_filter.py
+```
+
+Example input:
+```
+Please enter the path to the folder containing PDF files to verify:
+C:/documents/source
+
+Please enter the path to the folder where you want to store PDF files with the selected number of pages:
+C:/documents/invalid
+
+Please enter the number of pages the PDF files should have:
+2
+```
+
+## Output
+- PDFs with incorrect page count are moved
+- Correct PDFs remain untouched
+- Console prints: `Done!`
+
+## Use Cases
+- Invoice validation
+- Contract checks
+- Document compliance automation
+- Pre-ETL data cleansing
+
+## Notes
+- Script assumes all files in source folder are PDFs
+- Files are moved (not copied)
+
+## Author
+Paweł Goleń
